@@ -229,8 +229,8 @@ fn paint_to_brush(
                     cstop.color.r = stop.color.red;
                     cstop.color.g = stop.color.green;
                     cstop.color.b = stop.color.blue;
-                    cstop.color.a = stop.opacity.to_u8();
-                    cstop.offset = (stop.offset * opacity).get() as f32;
+                    cstop.color.a = (stop.opacity * opacity).to_u8();
+                    cstop.offset = stop.offset.get() as f32;
                     cstop
                 })
                 .collect();
@@ -257,8 +257,8 @@ fn paint_to_brush(
                     cstop.color.r = stop.color.red;
                     cstop.color.g = stop.color.green;
                     cstop.color.b = stop.color.blue;
-                    cstop.color.a = stop.opacity.to_u8();
-                    cstop.offset = (stop.offset * opacity).get() as f32;
+                    cstop.color.a = (stop.opacity * opacity).to_u8();
+                    cstop.offset = stop.offset.get() as f32;
                     cstop
                 })
                 .collect();
