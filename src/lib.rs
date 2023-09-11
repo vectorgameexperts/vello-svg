@@ -36,7 +36,6 @@
 //! - patterns
 
 use std::convert::Infallible;
-
 use usvg::NodeExt;
 use vello::{
     kurbo::{Affine, BezPath, Rect},
@@ -44,6 +43,10 @@ use vello::{
     SceneBuilder,
 };
 
+/// Re-export vello.
+pub use vello;
+
+/// Re-export usvg.
 pub use usvg;
 
 /// Append a [`usvg::Tree`] into a Vello [`SceneBuilder`], with default error
@@ -53,8 +56,12 @@ pub use usvg;
 ///
 /// See the [module level documentation](crate#unsupported-features) for a list
 /// of some unsupported svg features
-pub fn render_tree(sb: &mut SceneBuilder, svg: &usvg::Tree) {
-    render_tree_with(sb, svg, default_error_handler)
+pub fn render_tree(
+    sb: &mut SceneBuilder,
+    svg: &usvg::Tree,
+    transform: Option<Affine>,
+) {
+    render_tree_with(sb, svg, transform, default_error_handler)
         .unwrap_or_else(|e| match e {})
 }
 
@@ -71,12 +78,17 @@ pub fn render_tree_with<
 >(
     sb: &mut SceneBuilder,
     svg: &usvg::Tree,
+    transform2: Option<Affine>,
     mut on_err: F,
 ) -> Result<(), E> {
     for elt in svg.root.descendants() {
         let transform = {
             let usvg::Transform { a, b, c, d, e, f } = elt.abs_transform();
-            Affine::new([a, b, c, d, e, f])
+            if let Some(t2) = transform2 {
+                t2 * Affine::new([a, b, c, d, e, f])
+            } else {
+                Affine::new([a, b, c, d, e, f])
+            }
         };
         match &*elt.borrow() {
             usvg::NodeKind::Group(_) => {}
