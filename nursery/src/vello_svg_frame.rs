@@ -55,7 +55,7 @@ pub fn VellottiePlayer(props: &PlayerProps) -> Html {
                 init_state().await;
                 // Load file
                 info!("loading {path}...");
-                let contents = reqwest::get(format!("{baseurl}{path}"))
+                let contents = reqwest::get(format!("{path}"))
                     .await
                     .unwrap()
                     .text()
@@ -146,7 +146,6 @@ fn render(svg: &mut usvg::Tree) {
             - svg.size.height() * scale)
             .abs()
             / 2.0;
-        error!("dy: {dy}");
         Affine::scale(scale).then_translate(Vec2::new(0.0, dy))
     };
 
