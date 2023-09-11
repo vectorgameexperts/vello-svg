@@ -1,0 +1,31 @@
+[workspace]
+resolver = "2"
+members = ["demo"]
+
+[workspace.package]
+edition = "2021"
+version = "0.0.1"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/vectorgameexperts/vellottie"
+
+[workspace.dependencies]
+vello = { git = "https://github.com/linebender/vello", rev = "b0303ccf98df15a8b196272720d364a56f7304ba" }
+
+[package]
+name = "vello-svg"
+description = "SVG renderer built on vello."
+authors = [
+  "Sebastian Hamel <sebjfk@gmail.com>",
+  "Spencer C. Imbleau <spencer@imbleau.com>",
+]
+categories = ["rendering", "graphics"]
+keywords = ["2d", "vector-graphics", "vello"]
+version.workspace = true
+license.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+vello = { workspace = true }
+usvg = "0.33"
