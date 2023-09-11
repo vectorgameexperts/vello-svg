@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 160 110">
+    <defs>
+        <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+        <stop stop-color="#32c7f5" offset="0%" />
+        <stop stop-color="#86e2ff" offset="100%" />
+        </linearGradient>
+    </defs>
+    <!-- Fill -->
+    <path fill="url(#gradient)" fill-opacity="80%"
+        d="M30,0
+        h100
+        a30,30 0 0 1 30,30
+        v50
+        a30,30 0 0 1 -30,30
+        h-100
+        a30,30 0 0 1 -30,-30
+        v-50
+        a30,30 0 0 1 30,-30 z"
+    />
+    <!-- Shark fin -->
+    <path fill="#86e2ff" fill-opacity="80%"
+        d="M62.5,110
+        h 35
+        l -15,10
+        a -5,5 0 0 1 -5,0 z"
+    />
+    <!-- Highlight -->
+    <path stroke="#86e2ff" stroke-width="20" stroke-linecap="round"
+        d="M0,45
+        C0 15, 15 0, 45 0"
+    />
+</svg>

@@ -214,11 +214,11 @@ function makeMutClosure(arg0, arg1, dtor, f) {
     return real;
 }
 function __wbg_adapter_28(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures__invoke1_mut__h0e15d21b1b0c851c(arg0, arg1, addHeapObject(arg2));
+    wasm.wasm_bindgen__convert__closures__invoke1_mut__h3d8a073ca428cc52(arg0, arg1, addHeapObject(arg2));
 }
 
 function __wbg_adapter_33(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures__invoke0_mut__h2998a98118226e41(arg0, arg1);
+    wasm.wasm_bindgen__convert__closures__invoke0_mut__h40ac1149b6bac08f(arg0, arg1);
 }
 
 function __wbg_adapter_46(arg0, arg1, arg2) {
@@ -1613,7 +1613,7 @@ async function __wbg_init(input) {
     if (wasm !== undefined) return wasm;
 
     if (typeof input === 'undefined') {
-        input = new URL('nursery-a661b4d6d3d28d34_bg.wasm', import.meta.url);
+        input = new URL('nursery-c0e4174f30367214_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
