@@ -139,9 +139,11 @@ pub fn render_tree_with<
                     if let Some((brush, brush_transform)) =
                         paint_to_brush(&fill.paint, fill.opacity)
                     {
-                        // FIXME: Set the fill rule
                         sb.fill(
-                            Fill::NonZero,
+                            match fill.rule {
+                                usvg::FillRule::NonZero => Fill::NonZero,
+                                usvg::FillRule::EvenOdd => Fill::EvenOdd,
+                            },
                             transform,
                             &brush,
                             Some(brush_transform),
