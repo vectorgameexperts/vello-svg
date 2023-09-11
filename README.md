@@ -15,6 +15,17 @@ An integration to parse static SVG files and render them with [Vello](https://ve
   cargo run -p demo
   ```
 
+## Run Nursery (WASM)
+
+[Click here](https://vectorgameexperts.github.io/vello-svg/) to visit the nursery on web.
+
+- WASM (requires `cargo install trunk`)
+
+  ```shell
+  cd nursery
+  trunk serve
+  ```
+
 ## Attributions
 
 The animated vector graphics in the nursery and demo are lottie files available from Google Fonts' [Noto Animated Emojis](https://googlefonts.github.io/noto-emoji-animation/documentation).
