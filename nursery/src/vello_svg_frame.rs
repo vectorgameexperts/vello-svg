@@ -55,12 +55,8 @@ pub fn VellottiePlayer(props: &PlayerProps) -> Html {
                 init_state().await;
                 // Load file
                 info!("loading {path}...");
-                let contents = reqwest::get(format!("{path}"))
-                    .await
-                    .unwrap()
-                    .text()
-                    .await
-                    .unwrap();
+                let contents =
+                    reqwest::get(path).await.unwrap().text().await.unwrap();
                 info!("retrieved contents, parsing...");
                 let svg =
                     usvg::Tree::from_str(&contents, &usvg::Options::default());
