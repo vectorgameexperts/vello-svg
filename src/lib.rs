@@ -38,8 +38,8 @@
 use std::convert::Infallible;
 use usvg::NodeExt;
 use vello::{
-    kurbo::{Affine, BezPath, Rect},
-    peniko::{Brush, Color, Fill, Stroke},
+    kurbo::{Affine, BezPath, Rect, Stroke},
+    peniko::{Brush, Color, Fill},
     SceneBuilder,
 };
 
@@ -160,7 +160,7 @@ pub fn render_tree_with<
                         // FIXME: handle stroke options such as linecap,
                         // linejoin, etc.
                         sb.stroke(
-                            &Stroke::new(stroke.width.get() as f32),
+                            &Stroke::new(stroke.width.get()),
                             transform,
                             &brush,
                             Some(brush_transform),
