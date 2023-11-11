@@ -1,5 +1,4 @@
 use stylist::yew::styled_component;
-use wasm_bindgen::prelude::*;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]

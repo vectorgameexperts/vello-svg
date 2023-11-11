@@ -9,7 +9,8 @@ use vello_svg::{
         peniko::Color,
         util::RenderContext,
         util::RenderSurface,
-        RenderParams, RendererOptions, Scene, SceneBuilder,
+        AaConfig, AaSupport, RenderParams, RendererOptions, Scene,
+        SceneBuilder,
     },
 };
 use winit::{
@@ -28,6 +29,7 @@ struct RenderState {
     surface: RenderSurface,
     vello_renderer: vello_svg::vello::Renderer,
 }
+unsafe impl Send for RenderState {}
 
 #[derive(Properties, PartialEq)]
 pub struct PlayerProps {
@@ -36,8 +38,6 @@ pub struct PlayerProps {
 
 #[styled_component]
 pub fn VellottiePlayer(props: &PlayerProps) -> Html {
-    let baseurl = web_sys::window().unwrap().origin();
-
     let ctr_css = css! {
         display: inline-grid;
         margin: 10px;
@@ -104,12 +104,18 @@ async fn init_state() {
     _ = web_sys::HtmlElement::from(canvas).focus();
 
     let size = window.inner_size();
-    let surface = ctx.create_surface(&window, size.width, size.height).await;
+    let surface = ctx
+        .create_surface(&window, size.width, size.height)
+        .await
+        .unwrap();
     let device_handle = &ctx.devices[surface.dev_id];
     let vello_renderer = vello_svg::vello::Renderer::new(
         &device_handle.device,
-        &RendererOptions {
+        RendererOptions {
             surface_format: Some(surface.format),
+            timestamp_period: 0.0,
+            use_cpu: false,
+            antialiasing_support: AaSupport::area_only(),
         },
     )
     .unwrap();
@@ -146,7 +152,7 @@ fn render(svg: &mut usvg::Tree) {
     };
 
     let mut builder = SceneBuilder::for_scene(&mut scene);
-    vello_svg::render_tree(&mut builder, &svg, Some(transform));
+    vello_svg::render_tree(&mut builder, svg, Some(transform));
 
     let surface_texture = state
         .surface
@@ -164,6 +170,7 @@ fn render(svg: &mut usvg::Tree) {
                 base_color: Color::WHITE,
                 width,
                 height,
+                antialiasing_method: AaConfig::Area,
             },
         )
         .expect("failed to render to surface");
